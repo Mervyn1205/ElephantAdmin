@@ -9,11 +9,11 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-Route::get('think', function () {
-    return 'hello,ThinkPHP5!';
-});
+$adminDomain = config('admin_domain');
 
-Route::get('hello/:name', 'index/hello');
+Route::domain($adminDomain, function () {
+    Route::get('/login', 'auth.login/showLoginForm');
+})->bind('admin');
 
 return [
 

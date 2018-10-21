@@ -19,9 +19,9 @@ return [
     // 应用地址
     'app_host'               => '',
     // 应用调试模式
-    'app_debug'              => false,
+    'app_debug'              => Env::get('APP_DEBUG', 'false'),
     // 应用Trace
-    'app_trace'              => false,
+    'app_trace'              => Env::get('APP_TRACE', 'false'),
     // 是否支持多模块
     'app_multi_module'       => true,
     // 入口自动绑定模块
@@ -47,7 +47,7 @@ return [
     // 应用类库后缀
     'class_suffix'           => false,
     // 控制器类后缀
-    'controller_suffix'      => false,
+    'controller_suffix'      => 'Controller',
 
     // +----------------------------------------------------------------------
     // | 模块设置
@@ -97,7 +97,7 @@ return [
     // 是否开启路由延迟解析
     'url_lazy_route'         => false,
     // 是否强制使用路由
-    'url_route_must'         => false,
+    'url_route_must'         => true,
     // 合并路由规则
     'route_rule_merge'       => false,
     // 路由是否完全匹配
@@ -143,4 +143,5 @@ return [
     // 异常处理handle类 留空使用 \think\exception\Handle
     'exception_handle'       => '',
 
+    'admin_domain' => Env::get('ADMIN_DOMAIN', 'admin'),
 ];
