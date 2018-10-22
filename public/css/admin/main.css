@@ -1,0 +1,62 @@
+/* common */
+.fl {float: left;}
+.fr {float: right;}
+.none {display: none;}
+.w50 {width: 50px;}
+.block {display: block;}
+.tc {text-align: center;}
+.max-auto {max-height: 450px;overflow-y: auto;}
+
+/* Index */
+.main-body {
+    margin: 0;
+    padding: 15px 0;
+}
+
+.main-body iframe {
+    border: 0;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 15px);
+    height: -moz-calc(100% - 15px);
+    height: -webkit-calc(100% - 15px);
+    z-index: 1;
+}
+
+/** login */
+.login-main {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 350px;
+    margin: 0 auto;
+}
+
+.login-main header {
+    margin-top: 150px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 30px;
+    font-weight: 100;
+    text-align: center;
+}
+
+.login-main header, .login-main form, .login-main form .layui-input-inline {
+    margin-bottom: 15px;
+}
+
+.login-main form .layui-input-inline, .login-main form .layui-input-inline input, .login-main form .layui-input-inline button {
+    width: 100%;
+}
+
+.login-main form .login-btn {
+    margin-bottom: 5px;
+}
+
+/* page */
+.page-content .layui-tab {
+    margin: 0;
+    text-align: left!important;
+}
