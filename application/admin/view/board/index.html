@@ -1,0 +1,44 @@
+{extend name="layouts/base" /}
+{block name="header"}
+{__block__}
+<style type="text/css">
+    blockquote{
+        margin: 0px !important;
+    }
+</style>
+{/block}
+{block name="content"}
+<div class="layui-fluid" >
+    <div class="layui-row layui-col-space5">
+        <div class="layui-col-md6">
+            <blockquote class="layui-elem-quote">个人信息</blockquote>
+            <blockquote class="layui-elem-quote layui-quote-nm">
+                <p>* 用户角色：超级管理员</p>
+                <p>* 上次登陆IP：<?= $user['last_login_ip']; ?></p>
+                <p>* 上次登陆时间：<?= $user['last_login_time']; ?></p>
+            </blockquote>
+        </div>
+
+        <div class="layui-col-md6">
+            <blockquote class="layui-elem-quote">系统参数</blockquote>
+            <blockquote class="layui-elem-quote layui-quote-nm">
+                <p>当前版本：<?= config('app.cms_version'); ?></p>
+                <p>服务器环境：<?= PHP_OS; ?></p>
+                <p>服务器域名：<?= $_SERVER['HTTP_HOST'] ?></p>
+            </blockquote>
+        </div>
+    </div>
+
+    <div class="layui-row layui-col-space5">
+        <div class="layui-col-md6">
+            <blockquote class="layui-elem-quote">作者信息</blockquote>
+            <blockquote class="layui-elem-quote layui-quote-nm">
+                <p>* 开发者：Mervyn</p>
+            </blockquote>
+        </div>
+
+    </div>
+</div>
+{/block}
+
+

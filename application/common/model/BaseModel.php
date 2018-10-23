@@ -7,8 +7,12 @@
 
 namespace app\common\model;
 
+use app\common\traits\SingletonTrait;
 use think\Model;
 
 class BaseModel extends Model {
 
+    use SingletonTrait;
+
+    protected $connection = 'admin';
 }

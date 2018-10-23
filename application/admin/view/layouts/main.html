@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理系统</title>
+    {include file="public/header" /}
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <a href="index.html">
+            <div class="layui-logo">
+                ElephantAdmin
+            </div>
+        </a>
+
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left" id="header-nav">
+            <?php foreach($modules as $module): ?>
+            <li module-id="<?= $module['id']; ?>" class="layui-nav-item <?php if($module['is_active'] == 1): ?>layui-this<?php endif; ?>">
+                <a module-id="<?= $module['id']; ?>" href="<?= $module['url'] ?>"><?= $module['name']; ?></a>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <?= $user['username']; ?>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="<?= url('/admin/logout'); ?>">退出</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black" id="sidebar">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" id="left-nav" lay-filter="left-nav">
+                <?php foreach($activeMenu as $menu): ?>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="<?php if($menu['is_active'] && !isset($menu['child'])): ?>layui-this<?php endif; ?>" href="<?= $menu['url']; ?>"><?= $menu['name']; ?></a>
+                    <?php if(isset($menu['child']) && !empty($menu['child'])): ?>
+                    <dl class="layui-nav-child">
+                        <?php foreach($menu['child'] as $child): ?>
+                        <dd class="{if $child['is_active']}layui-this{/if}"><a href="<?= $child['url']; ?>">{$child['name']}</a></dd>
+                        <?php endforeach; ?>
+                    </dl>
+                    <?php endif; ?>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <div class="main-body">
+            {block name="content"}{/block}
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © ElephantAdmin
+    </div>
+</div>
+
+{include file="public/footer" /}
+<script src="<?= asset('/js/admin/index.js'); ?>"></script>
+</body>
+</html>

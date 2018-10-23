@@ -8,14 +8,8 @@
 namespace app\admin\model;
 
 use app\common\model\BaseModel;
-use app\common\traits\SingletonTrait;
 
 class Manager extends BaseModel {
-
-    use SingletonTrait;
-
-    protected $connection = 'admin';
-
 
 
 }

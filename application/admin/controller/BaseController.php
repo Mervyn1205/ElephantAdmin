@@ -11,6 +11,14 @@ use think\Controller;
 
 class BaseController extends Controller {
 
+    protected $_user = [];
+
+    protected $middleware = ['CheckLogin'];
+
+    protected $beforeActionList = [
+        'getUser' ,
+    ];
+
     /**
      * return json
      */
@@ -21,5 +29,14 @@ class BaseController extends Controller {
             'data' => $data,
         ];
         return json($data);
+    }
+
+    protected function getUser() {
+        $session = session('admin');
+        if (!$session) {
+            return [];
+        }
+
+        $this->_user = $session;
     }
 }

@@ -7,11 +7,15 @@
 
 namespace app\admin\controller;
 
-
-class BoardController extends BaseController {
+class IndexController extends BaseController {
 
     public function index() {
-        $this->assign('user', $this->_user);
+        $this->assign([
+            'modules'    => [],
+            'activeMenu' => [],
+            'user'       => $this->_user,
+        ]);
+
         return $this->fetch();
     }
 }
