@@ -4,4 +4,10 @@
  * @version 1.0
  * @date    2018-10-22
  */
- 
+
+namespace app\admin\model;
+
+
+class Menu extends BaseModel {
+
+}

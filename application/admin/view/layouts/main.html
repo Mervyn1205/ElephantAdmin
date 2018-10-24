@@ -9,7 +9,7 @@
 <body>
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <a href="index.html">
+        <a href="/">
             <div class="layui-logo">
                 ElephantAdmin
             </div>
@@ -18,8 +18,8 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left" id="header-nav">
             <?php foreach($modules as $module): ?>
-            <li module-id="<?= $module['id']; ?>" class="layui-nav-item <?php if($module['is_active'] == 1): ?>layui-this<?php endif; ?>">
-                <a module-id="<?= $module['id']; ?>" href="<?= $module['url'] ?>"><?= $module['name']; ?></a>
+            <li data-module-id="<?= $module['id']; ?>" class="layui-nav-item <?php if($module['is_active'] == 1): ?>layui-this<?php endif; ?>">
+                <a data-module-id="<?= $module['id']; ?>" href="<?= $module['url'] ?>"><?= $module['name']; ?></a>
             </li>
             <?php endforeach; ?>
         </ul>
@@ -46,7 +46,7 @@
                     <?php if(isset($menu['child']) && !empty($menu['child'])): ?>
                     <dl class="layui-nav-child">
                         <?php foreach($menu['child'] as $child): ?>
-                        <dd class="{if $child['is_active']}layui-this{/if}"><a href="<?= $child['url']; ?>">{$child['name']}</a></dd>
+                        <dd class="{if $child['is_active']}layui-this{/if}"><a target="mainContent" href="<?= $child['url']; ?>">{$child['name']}</a></dd>
                         <?php endforeach; ?>
                     </dl>
                     <?php endif; ?>
@@ -58,7 +58,7 @@
 
     <div class="layui-body">
         <div class="main-body">
-            {block name="content"}{/block}
+            <iframe id="iframe" name="mainContent" src="<?php echo url('dashboard');?>" frameborder="0" ></iframe>
         </div>
     </div>
 

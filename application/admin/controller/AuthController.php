@@ -5,24 +5,22 @@
  * @date    2018/10/18
  */
 
-namespace app\admin\controller\auth;
+namespace app\admin\controller;
 
 use app\admin\model\Manager;
-use app\admin\controller\BaseController;
 use think\Request;
 
-class LoginController extends BaseController {
+class AuthController extends BaseController {
 
-    protected $middleware = [
-    ];
+    protected $middleware = [];
 
-    public function showLoginForm(Request $request) {
+    public function showLoginForm() {
         return $this->fetch();
     }
 
     public function login(Request $request) {
-        $username = input("post.username");
-        $password = input("post.password");
+        $username = $request->post('username');
+        $password = $request->post('password');
 
         $manager = Manager::getInstance();
         $user    = $manager->where('username', $username)->find();
@@ -43,5 +41,10 @@ class LoginController extends BaseController {
             'homePage' => '/',
         ];
         return $this->_ajaxReturn(0, '', $data);
+    }
+
+    public function logout() {
+        session(null);
+        return redirect(url('/login'));
     }
 }

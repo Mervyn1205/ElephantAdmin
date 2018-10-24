@@ -2,6 +2,7 @@
 
 use think\migration\Migrator;
 use think\migration\db\Column;
+use \Phinx\Db\Adapter\MysqlAdapter;
 
 class CreateManagerTable extends Migrator {
     /**
@@ -27,6 +28,7 @@ class CreateManagerTable extends Migrator {
               ->addColumn('salt', 'string', ['limit' => 6, 'default' => ''])
               ->addColumn('last_login_time', 'integer', ['length' => 11, 'default' => 0])
               ->addColumn('last_login_ip', 'string', ['limit' => 32, 'default' => ''])
+              ->addColumn('status', 'integer', ['limit'   => MysqlAdapter::INT_TINY, 'default' => 1, 'comment' => '1 正常 0 禁用'])
               ->addColumn('created_at', 'integer', ['length' => 11])
               ->addColumn('updated_at', 'integer', ['length' => 11])
               ->create();

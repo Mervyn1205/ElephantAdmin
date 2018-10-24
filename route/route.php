@@ -14,8 +14,12 @@ $adminDomain = config('admin_domain');
 Route::domain($adminDomain, function () {
     Route::get('/', 'Index/index');
     Route::get('dashboard', 'Board/index')->name('dashboard');
-    Route::get('login', 'auth.login/showLoginForm');
-    Route::post('login', 'auth.login/login');
+    Route::get('login', 'auth/showLoginForm');
+    Route::post('login', 'auth/login');
+    Route::get('logout', 'auth/logout');
+    Route::get('menu/:pid', 'menu/getLeft');
+    Route::get('account/edit', 'account/edit');
+    Route::POST('account/edit', 'account/update');
 })->bind('admin');
 
 return [

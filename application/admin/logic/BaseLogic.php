@@ -2,15 +2,14 @@
 /**
  * @author  Mervyn<tangtz1205@163.com>
  * @version 1.0
- * @date    2018-10-22
+ * @date    2018-10-24
  */
 
-namespace app\common\model;
+namespace app\admin\logic;
 
 use app\common\traits\SingletonTrait;
-use think\Model;
 
-class BaseModel extends Model {
+class BaseLogic {
 
     use SingletonTrait;
 
