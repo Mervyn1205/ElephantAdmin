@@ -5,113 +5,55 @@ use think\migration\db\Column;
 use \Phinx\Db\Adapter\MysqlAdapter;
 
 class CreateMenuTable extends Migrator {
-    /**
-     * Change Method.
-     * Write your reversible migrations using this method.
-     * More information on writing migrations is available here:
-     * http://docs.phinx.org/en/latest/migrations.html#the-abstractmigration-class
-     * The following commands can be used in this method and Phinx will
-     * automatically reverse them when rolling back:
-     *    createTable
-     *    renameTable
-     *    addColumn
-     *    renameColumn
-     *    addIndex
-     *    addForeignKey
-     * Remember to call "create()" or "update()" and NOT "save()" when working
-     * with the Table class.
-     */
-    public function change() {
 
+    public function up() {
         $table = $this->table('menu', ['collation' => 'utf8mb4_general_ci']);
         $table->addColumn('name', 'string', ['limit' => 32, 'comment' => '菜单名称'])
               ->addColumn('route', 'string', ['limit' => 128, 'default' => '', 'comment' => ''])
               ->addColumn('params', 'string', ['limit' => 128, 'default' => '', 'comment' => ''])
-              ->addColumn('parent_id', 'string', ['limit' => 64, 'default' => '', 'comment' => '父节点'])
-              ->addColumn('status', 'integer', ['limit'   => MysqlAdapter::INT_TINY,
-                                                'default' => 1,
-                                                'comment' => '状态, 1 正常， 0 禁用',
+              ->addColumn('parent_id', 'integer', ['limit' => 11, 'default' => 0, 'comment' => '父节点'])
+              ->addColumn('status', 'integer', [
+                  'limit'   => MysqlAdapter::INT_TINY,
+                  'default' => 1,
+                  'comment' => '状态, 1 正常， 0 禁用',
               ])
-              ->addColumn('is_active', 'integer', ['limit'   => MysqlAdapter::INT_TINY,
-                                                   'default' => 1,
-                                                   'comment' => '状态, 1 正常， 0 禁用',
+              ->addColumn('is_active', 'integer', [
+                  'limit'   => MysqlAdapter::INT_TINY,
+                  'default' => 0,
+                  'comment' => '是否默认选中状态, 1 是， 0 否',
               ])
               ->addColumn('sort', 'integer', ['length' => 11, 'default' => 0, 'comment' => '排序'])
               ->addColumn('created_at', 'integer', ['length' => 11])
               ->addColumn('updated_at', 'integer', ['length' => 11])
               ->create();
 
+        $this->initData();
+    }
+
+    public function initData() {
         $data = [
-            [
-                'name'       => '个人面板',
-                'route'      => '/dashboard',
-                'params'     => '',
-                'parent_id'  => 0,
-                'sort'       => 0,
-                'status'     => 1,
-                'is_active'  => 1,
-                'created_at' => time(),
-                'updated_at' => time(),
-            ],
-            [
-                'name'       => '设置',
-                'route'      => '',
-                'params'     => '',
-                'parent_id'  => 0,
-                'sort'       => 0,
-                'status'     => 1,
-                'is_active'  => 0,
-                'created_at' => time(),
-                'updated_at' => time(),
-            ],
-            [
-                'name'       => '内容',
-                'route'      => '/dashboard',
-                'params'     => '',
-                'parent_id'  => 0,
-                'sort'       => 0,
-                'status'     => 1,
-                'is_active'  => 0,
-                'created_at' => time(),
-                'updated_at' => time(),
-            ],
+            ['id' => 1, 'parent_id' => 0, 'name' => '个人面板', 'route' => '/dashboard', 'is_active' => 1],
+            ['id' => 2, 'parent_id' => 1, 'name' => '个人信息', 'route' => '/dashboard'],
+            ['id' => 3, 'parent_id' => 2, 'name' => '面板', 'route' => '/dashboard'],
+            ['id' => 4, 'parent_id' => 2, 'name' => '修改密码', 'route' => '/account/edit'],
 
-            [
-                'name'       => '个人信息',
-                'route'      => '/dashboard',
-                'params'     => '',
-                'parent_id'  => 1,
-                'sort'       => 0,
-                'status'     => 1,
-                'is_active'  => 0,
-                'created_at' => time(),
-                'updated_at' => time(),
-            ],
-
-            [
-                'name'       => '面板',
-                'route'      => '/dashboard',
-                'params'     => '',
-                'parent_id'  => 4,
-                'sort'       => 0,
-                'status'     => 1,
-                'is_active'  => 1,
-                'created_at' => time(),
-                'updated_at' => time(),
-            ],
-
-            [
-                'name'       => '修改密码',
-                'route'      => '/account/edit',
-                'params'     => '',
-                'parent_id'  => 4,
-                'sort'       => 0,
-                'status'     => 1,
-                'is_active'  => 0,
-                'created_at' => time(),
-                'updated_at' => time(),
-            ],
+            ['id' => 5, 'parent_id' => 0, 'name' => '设置', 'route' => ''],
+            ['id' => 7, 'parent_id' => 5, 'name' => '系统设置', 'route' => ''],
+            ['id' => 8, 'parent_id' => 7, 'name' => '网站设置', 'route' => ''],
+            ['id' => 9, 'parent_id' => 5, 'name' => '管理员设置', 'route' => ''],
+            ['id' => 10, 'parent_id' => 9, 'name' => '角色管理', 'route' => ''],
+            ['id' => 11, 'parent_id' => 9, 'name' => '管理员', 'route' => '/manager'],
         ];
-        $table->insert($data)->save();
+
+        foreach ($data as $key => $row) {
+            $data[$key]['created_at'] = time();
+            $data[$key]['updated_at'] = time();
+        }
+
+        $this->table('menu')->insert($data)->save();
+    }
+
+    public function down() {
+        $this->table('menu')->drop();
     }
 }

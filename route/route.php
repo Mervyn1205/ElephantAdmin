@@ -20,6 +20,8 @@ Route::domain($adminDomain, function () {
     Route::get('menu/:pid', 'menu/getLeft');
     Route::get('account/edit', 'account/edit');
     Route::POST('account/edit', 'account/update');
+    Route::resource('manager', 'admin/manager');
+
 })->bind('admin');
 
 return [

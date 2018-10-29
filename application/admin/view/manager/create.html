@@ -1,0 +1,54 @@
+{extend name="layouts/base" /}
+
+{block name="content"}
+<div class="layui-fluid page-content" >
+    <div class="layui-row">
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li><a href="<?= url('/manager'); ?>">管理员管理</a></li>
+                <li class="layui-this">添加管理员</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <form class="layui-form" action="<?= url('/manager'); ?>" method="post">
+                        {:token()}
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">管理员名称</label>
+                            <div class="layui-input-block mw300">
+                                <label for=""><input type="text" name="username" lay-verify="required|max" verify-max=25 autocomplete="off" class="layui-input" value=""></label>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">密码</label>
+                            <div class="layui-input-block mw300">
+                                <label for=""><input type="password" name="password" lay-verify="required" autocomplete="off" class="layui-input" value=""></label>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">重复密码</label>
+                            <div class="layui-input-block mw300">
+                                <label for=""><input type="password" name="confirm_password" lay-verify="required" autocomplete="off" class="layui-input" value=""></label>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">状态</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="status" value="1" title="正常" checked>
+                                <input type="radio" name="status" value="0" title="禁用" >
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="formDemo">添加</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

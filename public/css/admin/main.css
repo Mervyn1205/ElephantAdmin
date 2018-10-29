@@ -6,6 +6,7 @@
 .block {display: block;}
 .tc {text-align: center;}
 .max-auto {max-height: 450px;overflow-y: auto;}
+.mw300 {max-width: 300px;}
 
 /* Index */
 .main-body {
